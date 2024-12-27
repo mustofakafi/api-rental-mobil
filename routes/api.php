@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\productApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,12 @@ Route::controller(\App\Http\Controllers\AuthController::class)->group(function()
     Route::post('/register', 'register');
     Route::post('/login', 'login');
     Route::post('/logout', 'logout')->middleware('auth:sanctum');
+
+    Route::get('/product', [productApiController::class, 'index']);
+    Route::post('/product', [productApiController::class, 'simpan']);
+    Route::get('/product/{id}/lihat', [productApiController::class,'show']);
+    Route::post('/product/{id}/edit', [productApiController::class, 'edit']);
+    Route::put('/product/{id}', [productApiController::class,'update']);
+    Route::delete('/product/{id}/hapus', [productApiController::class,'destroy']);
+
 });
